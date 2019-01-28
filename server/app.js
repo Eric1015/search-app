@@ -10,12 +10,7 @@ const helmet = require('helmet')
 
 const app = express()
 const router = express.Router()
-const url;
-if (process.env.MONGODB_URI) {
-    url = process.env.MONGODB_URI;
-} else {
-    url = "mongodb://localhost:27017/search-app";
-}
+const url = process.env.MONGODB_URI;
 
 /** connect to MongoDB datastore */
 mongoose.connect(url, function (err, res) {
