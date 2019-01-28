@@ -13,7 +13,7 @@ const router = express.Router()
 const url = process.env.MONGODB_URI;
 
 /** connect to MongoDB datastore */
-mongoose.connect(url, function (err, res) {
+mongoose.connect(url, { useNewUrlParser: true }, function (err, res) {
     if (err) { 
       console.log ('ERROR connecting to: ' + url + '. ' + err);
     } else {
@@ -32,6 +32,13 @@ app.use(bodyParser.json())
 app.use(helmet())
 
 app.use('/api', router)
+
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, 'frontend/public')))
+// Anything that doesn't match the above, send back index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/frontend/public/index.html'))
+})
 
 /** start server */
 app.listen(port, () => {
