@@ -41,7 +41,7 @@ app.get('*', (req, res) => {
     let full_root = __dirname.split("/");
     full_root.pop();
     let root = full_root.join("/");
-    res.sendFile(path.join(root + '../frontend/build/index.html'))
+    res.sendFile(path.join(root + '/frontend/build/index.html'))
 })
 
 /** start server */
