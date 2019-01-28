@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'frontend/build')))
 app.get('*', (req, res) => {
     let full_root = __dirname.split("/");
     full_root.pop();
-    let root = full_root.join("");
+    let root = full_root.join("/");
     res.sendFile(path.join(root + '../frontend/build/index.html'))
 })
 
