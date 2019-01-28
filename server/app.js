@@ -22,7 +22,7 @@ mongoose.connect(url, { useNewUrlParser: true }, function (err, res) {
     }
   });
 
-let port = 5000 || process.env.PORT
+let port = process.env.PORT || 5000;
 
 /** set up routes {API Endpoints} */
 routes(router)
@@ -32,7 +32,7 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(helmet())
 
-// app.use('/api', router)
+app.use('/api', router)
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, 'frontend/build')))
