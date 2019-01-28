@@ -34,9 +34,7 @@ app.use(helmet())
 
 app.use('/api', router)
 
-let full_dir = __dirname.split("/");
-full_dir.pop();
-let root = full_dir.join("/");
+let root = __dirname.split("/").splice(-1, 1).join("/");
 // Serve static files from the React frontend app
 app.use(express.static(path.join(root, '/frontend/build')))
 // Anything that doesn't match the above, send back index.html
