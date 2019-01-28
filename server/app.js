@@ -38,7 +38,10 @@ app.use('/api', router)
 app.use(express.static(path.join(__dirname, 'frontend/build')))
 // Anything that doesn't match the above, send back index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '../frontend/build/index.html'))
+    let full_root = __dirname.split("/");
+    full_root.pop();
+    let root = full_root.join("");
+    res.sendFile(path.join(root + '../frontend/build/index.html'))
 })
 
 /** start server */
