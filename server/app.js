@@ -11,7 +11,7 @@ const helmet = require('helmet')
 
 const app = express()
 const router = express.Router()
-const url = process.env.MONGODB_URI;
+const url = process.env.MONGODB_URI || "mongodb://localhost:27017/search-app";
 
 /** connect to MongoDB datastore */
 mongoose.connect(url, { useNewUrlParser: true }, function (err, res) {
