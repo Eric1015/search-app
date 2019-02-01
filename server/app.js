@@ -25,7 +25,7 @@ mongoose.connect(url, { useNewUrlParser: true }, function (err, res) {
 let port = process.env.PORT || 5000;
 
 /** set up routes {API Endpoints} */
-// routes(router)
+routes(router)
 
 /** set up middlewares */
 app.use(cors())
@@ -34,13 +34,23 @@ app.use(helmet())
 
 app.use('/api', router)
 
-let root = __dirname.split("/").splice(0, __dirname.split("/").length - 1).join("/");
-// Serve static files from the React frontend app
-app.use(express.static(path.join(root, '/frontend/build')))
-// Anything that doesn't match the above, send back index.html
-app.get('*', (req, res) => {
-    res.sendFile(path.join(root + '/frontend/build/index.html'))
-})
+if (process.env.NODE_ENV == 'production') {
+    let root = __dirname.split("/").splice(0, __dirname.split("/").length - 1).join("/");
+    // Serve static files from the React frontend app
+    app.use(express.static(path.join(root, '/frontend/build')))
+    // Anything that doesn't match the above, send back index.html
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(root + '/frontend/build/index.html'))
+    })    
+} else {
+    let root = __dirname.split("\\").splice(0, __dirname.split("\\").length - 1).join("/");
+    // Serve static files from the React frontend app
+    app.use(express.static(path.join(root, '/frontend/public')))
+    // Anything that doesn't match the above, send back index.html
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(root + '/frontend/public/index.html'))
+    })
+}
 
 /** start server */
 app.listen(port, () => {
