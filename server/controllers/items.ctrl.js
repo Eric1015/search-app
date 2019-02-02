@@ -40,7 +40,7 @@ module.exports = {
         if (!req.params.id.match(filter)) {
             res.send(new Error("id needs to be a single alphabet character"));
         } else {
-            let regex = new RegExp("^" + req.params.id.toLowerCase());
+            let regex = new RegExp("^" + req.params.id, "i");
             Item.find({name: regex}).sort('name').exec((err, items) => {
                 if (err) {
                     res.send(err);
