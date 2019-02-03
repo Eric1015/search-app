@@ -28,7 +28,6 @@ export const loadItemsWithKey = (key) => {
         dispatch({type: 'START_LOADING'});
         axios.get(`${url}items/${key}`)
         .then((result) => {
-            console.log("data has been read for key: " + key);
             let items = result.data;
             dispatch({type: 'LOAD_ITEMS_WITH_KEY', items, key: key});
         }).catch((err) => {
@@ -91,16 +90,11 @@ export const startLoading = () => ({
 
 export const handleSearchBarChange = (value) => {
     return (dispatch, getState) => {
-        console.log(getState());
         dispatch({type: 'START_SEARCH', value: value});
         let results = [];
-        console.log(value);
         if (value.length !== 0) {
             let key = value.substring(0, 1);
             let items = getState().items[key];
-            console.log(items);
-            console.log(items.length);
-            console.log(items[0]);
             for (let item of items) {
                 let currIndex = 0;
                 let matched = true;
