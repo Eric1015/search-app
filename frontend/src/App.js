@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Header } from 'semantic-ui-react';
 import SearchBarContainer from './containers/SearchBarContainer';
-import CurrentItemContainer from './containers/CurrentItemContainer';
+import CurrentMainContainer from './containers/CurrentMainContainer';
 import { loadItems } from './redux/actions/actions';
 
 class App extends Component {
@@ -16,7 +16,7 @@ class App extends Component {
                 <Header textAlign='center' as='h1'>Search App</Header>
                 <SearchBarContainer />
                 <br></br>
-                <CurrentItemContainer />
+                <CurrentMainContainer />
             </div>
         );
     }

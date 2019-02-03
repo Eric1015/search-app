@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NewItemFormContainer from '../containers/NewItemFormContainer';
-import Item from '../containers/Item';
+import ItemContainer from '../containers/ItemContainer';
 import ToggleButton from '../containers/ToggleButton';
 import {conditions} from '../redux/actions/actions';
 import { Container } from 'semantic-ui-react';
 
-let ItemContainer = ({ condition, item }) => {
+let MainContainer = ({ condition, item }) => {
     if (condition === conditions.FORM) {
         return (
             <div>
@@ -19,7 +19,7 @@ let ItemContainer = ({ condition, item }) => {
     } else if (condition === conditions.ITEM) {
         return (
             <div>
-                <Item item={item}/>
+                <ItemContainer item={item}/>
                 <Container textAlign='center'>
                     <ToggleButton condition={conditions.FORM} value="New Item" />
                 </Container>
@@ -34,7 +34,7 @@ let ItemContainer = ({ condition, item }) => {
     }
 }
 
-ItemContainer.propTypes = {
+MainContainer.propTypes = {
     condition: PropTypes.string.isRequired,
     item: PropTypes.shape({
         title: PropTypes.string.isRequired,
@@ -44,4 +44,4 @@ ItemContainer.propTypes = {
     })
 }
 
-export default ItemContainer;
+export default MainContainer;
