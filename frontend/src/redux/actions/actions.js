@@ -128,10 +128,13 @@ export const handleSearchBarChange = (value) => {
     }
 }
 
-export const searchBarResultSelect = (e, {result}) => ({
-    type: 'SEARCH_RESULT_SELECT',
-    result
-})
+export const handleSearchBarResultSelect = (e, result) => {
+    return (dispatch) => {
+        dispatch({type: 'SEARCH_RESULT_SELECT', result});
+        dispatch({type: 'SET_ITEM', item: result});
+        dispatch({type: 'SET_CONDITION', condition: conditions.ITEM});
+    }
+}
 
 export const conditions = {
     FORM: 'FORM',

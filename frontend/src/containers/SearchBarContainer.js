@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import SearchBar from '../components/SearchBar';
-import { handleSearchBarChange } from '../redux/actions/actions';
+import { handleSearchBarChange, handleSearchBarResultSelect } from '../redux/actions/actions';
 
 const mapStateToProps = (state, ownProps) => ({
     searchBarLoading: state.searchBar.loading,
@@ -9,7 +9,8 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onSearchChange: (event) => dispatch(handleSearchBarChange(event.target.value))
+    onSearchChange: (event) => dispatch(handleSearchBarChange(event.target.value)),
+    onResultSelect: (event, {result}) => dispatch(handleSearchBarResultSelect(event, result)),
 })
 
 export default connect(

@@ -14,6 +14,7 @@ const SearchBar = (props) => {
                             <Search
                                 loading={searchBarLoading}
                                 onSearchChange={props.onSearchChange}
+                                onResultSelect={props.onResultSelect}
                                 results={results}
                                 value={value}
                             />
