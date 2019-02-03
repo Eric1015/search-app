@@ -101,13 +101,14 @@ export const handleSearchBarChange = (value) => {
                 let str = item.title;
                 for (let i = 0; i < value.length; i++) {
                     for (let j = currIndex; j < str.length && currIndex < str.length; j++) {
-                        if (str.charAt(j) === value.charAt(i)) {
+                        if (str.charAt(j).toLowerCase() === value.charAt(i).toLowerCase()) {
                             currIndex = j + 1;
                             break;
                         } else if (currIndex === str.length - 1) {
                             matched = false;
                             break;
                         }
+                        currIndex++;
                     }
                     if (!matched) {
                         break;
