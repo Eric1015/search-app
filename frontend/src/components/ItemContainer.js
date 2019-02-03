@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NewItemFormContainer from '../containers/NewItemFormContainer';
-import Item from './Item';
+import Item from '../containers/Item';
 import ToggleButton from '../containers/ToggleButton';
 import {conditions} from '../redux/actions/actions';
 

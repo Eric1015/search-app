@@ -49,6 +49,11 @@ export const addItem = (item) => {
     }
 }
 
+export const setItem = (item) => ({
+    type: 'SET_ITEM',
+    item
+})
+
 export const disableForm = () => ({
     type: 'DISABLE_FORM'
 })
