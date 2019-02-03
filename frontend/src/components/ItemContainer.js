@@ -37,8 +37,8 @@ ItemContainer.propTypes = {
     condition: PropTypes.string.isRequired,
     item: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
+        link: PropTypes.string,
+        image: PropTypes.string,
         description: PropTypes.string.isRequired
     })
 }
