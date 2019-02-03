@@ -37,7 +37,7 @@ const items = (state = initialState, action) => {
         case 'LOAD_ITEMS_WITH_KEY':
             return {
                 ...state,
-                [action.key]: [...state[action.key], action.items]
+                [action.key]: action.items
             }
         default: 
             return state;

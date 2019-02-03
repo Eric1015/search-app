@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 import form from './reducers/form';
-import item from './reducers/item';
+import items from './reducers/items';
 import condition from './reducers/condition';
 import loading from './reducers/loading';
+import searchBar from './reducers/searchBar';
 
 export default combineReducers({
     form,
-    item,
+    items,
     condition,
-    loading
+    loading,
+    searchBar
 });
