@@ -8,3 +8,9 @@
 div.search-bar div.input {
     width: 100% !important;
 }
+
+.loading-container {
+    min-width: 100%;
+    min-height: 100vh;
+    font-size: 150%;
+}
