@@ -2,9 +2,9 @@ const Item = require('../models/item');
 
 module.exports = {
     addItem: (req, res, next) => {
-        let {name, description, link, image} = req.body;
+        let {title, description, link, image} = req.body;
         let short_description = description.substring(0, 10) + "...";
-        let obj = {name, description, short_description, link};
+        let obj = {title, description, short_description, link};
         if (image) {
             // upload image to the item
         }
@@ -23,7 +23,7 @@ module.exports = {
         }
     },
     getAll: (req, res, next) => {
-        Item.find({}).sort('name').exec((err, items) => {
+        Item.find({}).sort('title').exec((err, items) => {
             if (err) {
                 res.send(err);
             } else {
@@ -41,7 +41,7 @@ module.exports = {
             res.send(new Error("id needs to be a single alphabet character"));
         } else {
             let regex = new RegExp("^" + req.params.id, "i");
-            Item.find({name: regex}).sort('name').exec((err, items) => {
+            Item.find({title: regex}).sort('title').exec((err, items) => {
                 if (err) {
                     res.send(err);
                 } else {

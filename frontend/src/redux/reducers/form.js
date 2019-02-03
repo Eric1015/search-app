@@ -1,5 +1,5 @@
 const initialState = {
-    name: "",
+    title: "",
     link: "",
     image: "",
     description: "",

@@ -6,8 +6,8 @@ let NewItemForm = ({handleSubmit, handleChange, disabled}) => {
     return (
         <Form onSubmit={handleSubmit}>
             <Form.Field>
-                <label htmlFor="name">Name</label>
-                <input type="text" name="name" disabled={disabled} onChange={handleChange}></input>
+                <label htmlFor="title">Name</label>
+                <input type="text" name="title" disabled={disabled} onChange={handleChange}></input>
             </Form.Field>
             <Form.Field>
                 <label htmlFor="link">Link</label>
