@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Header } from 'semantic-ui-react';
-import SearchBar from './components/SearchBar';
+import SearchBarContainer from './containers/SearchBarContainer';
 import CurrentItemContainer from './containers/CurrentItemContainer';
+import { loadItems } from './redux/actions/actions';
 
 class App extends Component {
-  render() {
-    return (
-        <div>
-            <Header textAlign='center' as='h1'>Search App</Header>
-            <SearchBar />
-            <CurrentItemContainer />
-        </div>
-    );
-  }
+    componentDidMount() {
+        this.props.loadItems();
+    }
+
+    render() {
+        return (
+            <div>
+                <Header textAlign='center' as='h1'>Search App</Header>
+                <SearchBarContainer />
+                <CurrentItemContainer />
+            </div>
+        );
+    }
 }
 
-export default App;
+const mapStateToProps = (state, ownProps) => ({
+    items: state.items
+})
+
+export default connect(mapStateToProps, {
+    loadItems
+})(App);
