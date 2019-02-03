@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import NewItemForm from '../containers/NewItemForm';
+import NewItemFormContainer from '../containers/NewItemFormContainer';
 import Item from './Item';
 import ToggleButton from '../containers/ToggleButton';
 import {conditions} from '../redux/actions/actions';
@@ -9,7 +9,7 @@ let ItemContainer = ({ condition, item }) => {
     if (condition === conditions.FORM) {
         return (
             <div>
-                <NewItemForm />
+                <NewItemFormContainer />
                 <div>
                     <ToggleButton condition={conditions.INITIAL} value="Back" />
                 </div>
@@ -36,7 +36,7 @@ let ItemContainer = ({ condition, item }) => {
 ItemContainer.propTypes = {
     condition: PropTypes.string.isRequired,
     item: PropTypes.shape({
-        name: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
         link: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired
