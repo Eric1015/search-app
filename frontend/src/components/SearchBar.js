@@ -12,11 +12,13 @@ const SearchBar = (props) => {
                         </Grid.Column>
                         <Grid.Column width={8}>
                             <Search
+                                className="search-bar"
                                 loading={searchBarLoading}
                                 onSearchChange={props.onSearchChange}
                                 onResultSelect={props.onResultSelect}
                                 results={results}
                                 value={value}
+                                fluid
                             />
                         </Grid.Column>
                         <Grid.Column width={4}>

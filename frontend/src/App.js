@@ -15,6 +15,7 @@ class App extends Component {
             <div>
                 <Header textAlign='center' as='h1'>Search App</Header>
                 <SearchBarContainer />
+                <br></br>
                 <CurrentItemContainer />
             </div>
         );

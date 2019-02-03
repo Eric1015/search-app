@@ -4,31 +4,32 @@ import NewItemFormContainer from '../containers/NewItemFormContainer';
 import Item from '../containers/Item';
 import ToggleButton from '../containers/ToggleButton';
 import {conditions} from '../redux/actions/actions';
+import { Container } from 'semantic-ui-react';
 
 let ItemContainer = ({ condition, item }) => {
     if (condition === conditions.FORM) {
         return (
             <div>
                 <NewItemFormContainer />
-                <div>
+                <Container textAlign='center'>
                     <ToggleButton condition={conditions.INITIAL} value="Back" />
-                </div>
+                </Container>
             </div>
         )
     } else if (condition === conditions.ITEM) {
         return (
             <div>
                 <Item item={item}/>
-                <div>
+                <Container textAlign='center'>
                     <ToggleButton condition={conditions.FORM} value="New Item" />
-                </div>
+                </Container>
             </div>
         )
     } else {
         return (
-            <div>
+            <Container textAlign='center'>
                 <ToggleButton condition={conditions.FORM} value="New Item" />
-            </div>
+            </Container>
         )
     }
 }
