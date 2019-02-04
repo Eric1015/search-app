@@ -1,6 +1,6 @@
 const seeder = require('mongoose-seed');
 
-const url = "mongodb://localhost:27017/search-app";
+const url = process.env.MONGODB_URI || "mongodb://localhost:27017/search-app";
 // Connect to MongoDB via Mongoose
 seeder.connect(url, { useNewUrlParser: true }, function () {
 
