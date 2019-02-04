@@ -6,7 +6,7 @@ seeder.connect(url, { useNewUrlParser: true }, function () {
 
     // Load Mongoose models
     seeder.loadModels([
-        'models/item.js'
+        './models/item.js'
     ]);
 
     // Clear specified collections
