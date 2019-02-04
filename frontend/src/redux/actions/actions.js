@@ -100,6 +100,7 @@ export const handleSearchBarChange = (value) => {
     return (dispatch, getState) => {
         dispatch({ type: 'START_SEARCH', value: value });
         let results = [];
+        value = value.split(" ").join("");
         if (value.length !== 0) {
             let key = value.substring(0, 1);
             let items = getState().items[key];
