@@ -1,4 +1,5 @@
 const seeder = require('mongoose-seed');
+const path = require('path');
 
 const url = process.env.MONGODB_URI || "mongodb://localhost:27017/search-app";
 // Connect to MongoDB via Mongoose
@@ -6,7 +7,7 @@ seeder.connect(url, { useNewUrlParser: true }, function () {
 
     // Load Mongoose models
     seeder.loadModels([
-        './models/item.js'
+        path.join(__dirname, '/models/item.js')
     ]);
 
     // Clear specified collections
