@@ -99,23 +99,29 @@ export const handleSearchBarChange = (value) => {
                 let currIndex = 0;
                 let matched = true;
                 let str = item.title;
-                for (let i = 0; i < value.length; i++) {
-                    for (let j = currIndex; j < str.length && currIndex < str.length; j++) {
-                        if (str.charAt(j).toLowerCase() === value.charAt(i).toLowerCase()) {
-                            currIndex = j + 1;
-                            break;
-                        } else if (currIndex === str.length - 1) {
+                if (value.length <= str.length) {
+                    for (let i = 0; i < value.length; i++) {
+                        if (currIndex > str.length - 1) {
                             matched = false;
                             break;
                         }
-                        currIndex++;
+                        for (let j = currIndex; j < str.length; j++) {
+                            if (str.charAt(j).toLowerCase() === value.charAt(i).toLowerCase()) {
+                                currIndex = j + 1;
+                                break;
+                            } else if (currIndex >= str.length - 1) {
+                                matched = false;
+                                break;
+                            }
+                            currIndex++;
+                        }
+                        if (!matched) {
+                            break;
+                        }
                     }
-                    if (!matched) {
-                        break;
+                    if (matched) {
+                        results.push(item);
                     }
-                }
-                if (matched) {
-                    results.push(item);
                 }
             }
         }
