@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { disableForm, formChange } from '../redux/actions/actions';
+import { submitForm, formChange } from '../redux/actions/actions';
 import NewItemForm from '../components/NewItemForm';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -7,7 +7,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    handleSubmit: () => dispatch(disableForm()),
+    handleSubmit: () => dispatch(submitForm()),
     handleChange: (event) => dispatch(formChange(event.target.name, event.target.value))
 })
 

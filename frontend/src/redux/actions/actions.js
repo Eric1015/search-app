@@ -2,50 +2,45 @@ import axios from 'axios';
 
 const url = process.env.NODE_ENV === 'production' ? "/api/" : "http://localhost:8080/api/"
 
-export const loadItems = () => {
-    return (dispatch) => {
-        dispatch({type: 'START_LOADING'});
-        let proms = [];
-        for (let id of "abcdefghijklmnopqrstuvwxyz".split("")) {
-            let prom = axios.get(`${url}items/${id}`)
-            .then((result) => {
-                let items = result.data;
-                dispatch({type: 'LOAD_ITEMS_WITH_KEY', items, key: id});
-            }).catch((err) => {
-                console.log(err);
-            });
-            proms.push(prom);
-        }
-        Promise.all(proms).then(() => {
-            console.log("Data has been read");
-            dispatch({type: 'FINISH_LOADING'});
-        });
+export const loadItems = () => (dispatch) => {
+    dispatch({ type: 'START_LOADING' });
+    let proms = [];
+    for (let id of "abcdefghijklmnopqrstuvwxyz".split("")) {
+        let prom = dispatch(loadItemsWithKey(id));
+        proms.push(prom);
     }
+    Promise.all(proms).then(() => {
+        console.log("Data has been read");
+        dispatch({ type: 'FINISH_LOADING' });
+    });
+    return Promise.resolve();
 }
 
-export const loadItemsWithKey = (key) => {
-    return (dispatch) => {
-        dispatch({type: 'START_LOADING'});
-        axios.get(`${url}items/${key}`)
+export const loadItemsWithKey = (key) => (dispatch) => {
+    dispatch({ type: 'START_LOADING' });
+    axios.get(`${url}items/${key}`)
         .then((result) => {
             let items = result.data;
-            dispatch({type: 'LOAD_ITEMS_WITH_KEY', items, key: key});
+            dispatch({ type: 'LOAD_ITEMS_WITH_KEY', items, key: key });
         }).catch((err) => {
             console.log(err);
         });
-    }
+    return Promise.resolve();
 }
 
-export const addItem = (item) => {
-    return (dispatch) => {
-        axios.post(`${url}items`, item)
+export const addItem = (item) => (dispatch) => {
+    dispatch(startLoading());
+    axios.post(`${url}items`, item)
         .then((result) => {
             let item = result.data;
-            loadItemsWithKey(item.title.substring(0, 1));
+            dispatch(loadItemsWithKey(item.title.substring(0, 1)))
+                .then((res) => {
+                    dispatch(finishLoading());
+                });
         }).catch((err) => {
             console.log(err);
         });
-    }
+    return Promise.resolve();
 }
 
 export const setItem = (item) => ({
@@ -71,9 +66,22 @@ export const formChange = (name, value) => ({
     value
 })
 
-export const SubmitForm = () => ({
-    type: 'SUMIT_FORM'
-})
+export const submitForm = () => (dispatch, getState) => {
+    dispatch(disableForm());
+    const form = getState().form;
+    const { title, description, link, image } = form;
+    const data = { title, description, link, image };
+    dispatch(addItem(data))
+        .then((result) => {
+            dispatch(resetForm());
+            dispatch(setCondition(conditions.INITIAL));
+        }).catch((err) => {
+
+        }).finally(() => {
+            dispatch(enableForm());
+        })
+    return Promise.resolve();
+}
 
 export const setCondition = (condition) => ({
     type: 'SET_CONDITION',
@@ -90,7 +98,7 @@ export const startLoading = () => ({
 
 export const handleSearchBarChange = (value) => {
     return (dispatch, getState) => {
-        dispatch({type: 'START_SEARCH', value: value});
+        dispatch({ type: 'START_SEARCH', value: value });
         let results = [];
         if (value.length !== 0) {
             let key = value.substring(0, 1);
@@ -125,15 +133,15 @@ export const handleSearchBarChange = (value) => {
                 }
             }
         }
-        dispatch({type: 'FINISH_SEARCH', results: results})
+        dispatch({ type: 'FINISH_SEARCH', results: results })
     }
 }
 
 export const handleSearchBarResultSelect = (e, result) => {
     return (dispatch) => {
-        dispatch({type: 'SEARCH_RESULT_SELECT', result});
-        dispatch({type: 'SET_ITEM', item: result});
-        dispatch({type: 'SET_CONDITION', condition: conditions.ITEM});
+        dispatch({ type: 'SEARCH_RESULT_SELECT', result });
+        dispatch({ type: 'SET_ITEM', item: result });
+        dispatch({ type: 'SET_CONDITION', condition: conditions.ITEM });
     }
 }
 
