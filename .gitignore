@@ -1,1 +1,4 @@
 /node_modules
+
+# Ignore the environment variables for local usage
+/server/config/dev.js
