@@ -4,15 +4,12 @@ module.exports = {
     addItem: (req, res, next) => {
         let {title, description, link, image} = req.body;
         let short_description = description.substring(0, 10) + "...";
-        let obj = {title, description, short_description, link};
-        if (image) {
-            // upload image to the item
-        }
+        let obj = {title, description, image, short_description, link};
         saveItem(obj);
         function saveItem(obj) {
             new Item(obj).save((err, item) => {
                 if (err) {
-                    res.send(err);
+                    res.status(500).send(err);
                 } else if (!item) {
                     res.send(404);
                 } else {

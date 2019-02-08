@@ -14,3 +14,11 @@ div.search-bar div.input {
     min-height: 100vh;
     font-size: 150%;
 }
+
+.image-container {
+    max-width: 100%;
+}
+
+.image-container img {
+    max-width: 100%;
+}

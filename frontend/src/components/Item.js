@@ -14,7 +14,7 @@ const Item = ({ item }) => {
                     <p>{item.description}</p>
                 </Grid.Column>
                 <Grid.Column width={4}>
-                    <div>
+                    <div className="image-container">
                         <img src={item.image} alt=''></img>
                     </div>
                 </Grid.Column>

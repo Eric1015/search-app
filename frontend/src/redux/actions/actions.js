@@ -34,11 +34,12 @@ export const addItem = (item) => (dispatch) => {
         .then((result) => {
             let item = result.data;
             dispatch(loadItemsWithKey(item.title.substring(0, 1)))
-                .then((res) => {
+                .finally(() => {
                     dispatch(finishLoading());
                 });
         }).catch((err) => {
-            console.log(err);
+            console.log(err.response.data);
+            dispatch(finishLoading());
         });
     return Promise.resolve();
 }
@@ -65,6 +66,26 @@ export const formChange = (name, value) => ({
     name,
     value
 })
+
+export const imageUpload = (event) => (dispatch, getState) => {
+    event.preventDefault();
+    const file = event.target.files[0];
+    const fd = new FormData();
+    fd.append('file', file);
+    axios({
+        method: 'post',
+        url: `${url}image-upload`,
+        data: fd
+    })
+        .then((result) => {
+            console.log(result.data.image_url);
+            dispatch({type: 'IMAGE_UPLOAD', image: result.data.image_url});
+            console.log("Image uploaded!");
+        }).catch((err) => {
+            console.log("Fail uploading!");
+        });
+    return Promise.resolve();
+}
 
 export const submitForm = () => (dispatch, getState) => {
     dispatch(disableForm());

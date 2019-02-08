@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Button, Grid, Container, Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-let NewItemForm = ({ handleSubmit, handleChange, disabled }) => {
+let NewItemForm = ({ handleSubmit, handleChange, handleImageUpload, disabled }) => {
     return (
         <Form onSubmit={handleSubmit} className='new-item-form'>
             <Header textAlign='center' as='h2'>New Item</Header>
@@ -19,7 +19,7 @@ let NewItemForm = ({ handleSubmit, handleChange, disabled }) => {
                         </Form.Field>
                         <Form.Field>
                             <label htmlFor="image">Image</label>
-                            <input type="file" name="image" disabled={disabled} onChange={handleChange}></input>
+                            <input type="file" name="image" accept=".jpeg,.png" disabled={disabled} onChange={handleImageUpload}></input>
                         </Form.Field>
                     </Grid.Column>
                     <Grid.Column width={8}>

@@ -27,6 +27,11 @@ const form = (state = initialState, action) => {
             };
         case 'SUBMIT_FORM':
             return state;
+        case 'IMAGE_UPLOAD':
+            return {
+                ...state,
+                image: action.image
+            }
         default:
             return state;
     }
