@@ -2,3 +2,4 @@
 
 # Ignore the environment variables for local usage
 /server/config/dev.js
+/server/config/test.js
