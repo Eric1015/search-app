@@ -4,7 +4,7 @@ import items from './reducers/items';
 import current_item from './reducers/current_item';
 import condition from './reducers/condition';
 import loading from './reducers/loading';
-import searchBar from './reducers/searchBar';
+import custom from './reducers/custom';
 
 export default combineReducers({
     form,
@@ -12,5 +12,5 @@ export default combineReducers({
     current_item,
     condition,
     loading,
-    searchBar
+    custom
 });

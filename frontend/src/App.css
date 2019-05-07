@@ -5,6 +5,11 @@
     padding: 3vh 5vw;
 }
 
+div.search-bar {
+    width: 50% !important;
+    margin: 0 auto;
+}
+
 div.search-bar div.input {
     width: 100% !important;
 }
@@ -21,4 +26,9 @@ div.search-bar div.input {
 
 .image-container img {
     max-width: 100%;
+}
+
+.custom-result {
+    color: red !important;
+    font-family: 'Times New Roman', Times, serif !important;
 }
